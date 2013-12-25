@@ -6,8 +6,8 @@
 #  Purpose: Estimate moments and low order statistics, including mean,   C
 #           variance, skewness, and kurtosis.                            C
 #                                                                        C
-#  Author: Xiaofei Hu                      Date:                         C
-#  Reviewer:                                                             C
+#  Author: Xiaofei Hu <xhu@iastate.edu>                                  C
+#  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 

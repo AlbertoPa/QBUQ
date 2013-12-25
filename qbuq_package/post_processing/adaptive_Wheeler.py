@@ -5,8 +5,8 @@
 #  Module name: adaptive_Wheeler                                         C
 #  Purpose: Generate weights and nodes using adaptive Wheeler algorithm. C
 #                                                                        C
-#  Author: Xiaofei Hu                      Date:                         C
-#  Reviewer:                                                             C
+#  Author: Xiaofei Hu <xhu@iastate.edu>                                  C
+#  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
 #  Yuan, C., Fox, R.O., 2011. Journal of Computational Physics 230,      C

@@ -5,8 +5,8 @@
 #  Module name: pre_functions                                            C
 #  Purpose: Interactive functions for pre_qbuq.py                        C
 #                                                                        C
-#  Author: Xiaofei Hu                      Date:                         C
-#  Reviewer:                                                             C
+#  Author: Xiaofei Hu <xhu@iastate.edu>                                  C
+#  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 

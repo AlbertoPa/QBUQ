@@ -5,8 +5,8 @@
 #  Module name: pre_algorithms                                           C
 #  Purpose: Algorithms to generate samples for uncertain parameter(s).   C
 #                                                                        C
-#  Author: Xiaofei Hu                      Date:                         C
-#  Reviewer:                                                             C
+#  Author: Xiaofei Hu <xhu@iastate.edu>                                  C
+#  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
 #  Gautschi, W., 2004. Oxford University Press, New York.                C

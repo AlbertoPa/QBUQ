@@ -6,8 +6,8 @@
 #  Purpose: Reconstruct the the probability distribution function using  C
 #           beta EQMOM on bounded interval [a,b].                        C
 #                                                                        C
-#  Author: Xiaofei Hu                      Date:                         C
-#  Reviewer:                                                             C
+#  Author: Xiaofei Hu <xhu@iastate.edu>                                  C
+#  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
 #  Yuan, C., Laurent, F., Fox, R.O., 2012. Journal of Aerosol Science    C

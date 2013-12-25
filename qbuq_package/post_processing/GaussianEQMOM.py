@@ -6,8 +6,8 @@
 #  Purpose: Reconstruct the the probability distribution function using  C
 #           2-node Gaussian EQMOM on (-inf, inf).                        C
 #                                                                        C
-#  Author: Xiaofei Hu                      Date:                         C
-#  Reviewer:                                                             C
+#  Author: Xiaofei Hu <xhu@iastate.edu>                                  C
+#  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
 #  Chalons, C., Fox, R.O., Massot, M., 2010. Center for Turbulence       C
