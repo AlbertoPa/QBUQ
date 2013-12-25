@@ -1,0 +1,31 @@
+#! /bin/bash
+#
+#vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
+#                                                                        C
+#  Module name: extract data                                             C
+#  Purpose: Extract data for each case using post_mfix.                  C
+#                                                                        C
+#  Author: Xiaofei Hu                      Date:                         C
+#  Reviewer:                                                             C
+#                                                                        C
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
+#
+# Set up run directory and post_mfix directory
+run_dir=`pwd`
+post_file=$1
+post_mfix_dir=$2
+#
+# Generate input files for post_processing of MFIX for each case.
+for case in `cat list_of_cases.txt`
+do
+    cd $case
+    echo "***********************************************************"
+    echo $case
+    echo 'Generating post_mfix input file...'
+    sed '1s/.*/'$case'/' ../$post_file > $post_file
+    echo 'Post processing MFIX data...'
+    $post_mfix_dir/post_mfix < $post_file
+    echo 'Done.'
+    cd $run_dir
+done
+echo 'All done!'

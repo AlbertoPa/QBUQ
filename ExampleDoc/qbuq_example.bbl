@@ -1,0 +1,21 @@
+\begin{thebibliography}{1}
+
+\bibitem{Chalons2010}
+C.~Chalons, R.O. Fox, and M.~Massot.
+\newblock A multi-{G}aussian quadrature method of moments for gas-particle
+  flows in a {LES} framework.
+\newblock In {\em Proceedings of the {S}ummer {P}rogram}, pages 347 -- 358.
+  Center for Turbulence Research, Stanford University, 2010.
+
+\bibitem{YuanFox2011}
+C.~Yuan and R.~O. Fox.
+\newblock Conditional quadrature method of moments for kinetic equations.
+\newblock {\em Journal of Computational Physics}, 230(22):8216--8246, 2011.
+
+\bibitem{YuanLaurentFox2011}
+C.~Yuan, F.~Laurent, and R.~O. Fox.
+\newblock An extended quadrature method of moments for population balance
+  equations.
+\newblock {\em Journal of Aerosol Science}, 51:1--23, 2012.
+
+\end{thebibliography}

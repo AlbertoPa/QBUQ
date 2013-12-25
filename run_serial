@@ -1,0 +1,39 @@
+#! /bin/bash
+#
+#vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
+#                                                                        C
+#  Module name: run_serial                                               C
+#  Purpose: Compile and run all generated cases in serial.               C
+#                                                                        C
+#  Author: Xiaofei Hu                      Date:                         C
+#  Reviewer:                                                             C
+#                                                                        C
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
+#
+# set up run directory and MFIX model directory
+run_dir=`pwd`
+echo $run_dir
+mfix_model_dir=$1
+echo $mfix_model_dir
+#
+# Initially compile MFIX
+echo 'Initial compilation of MFIX'
+sh $mfix_model_dir/make_mfix -c
+sh $mfix_model_dir/make_mfix
+#
+# Compile and run cases in serial
+for case in `cat list_of_cases.txt`
+do
+    cd $case
+    echo "*******************************************************************"
+    echo $case
+    echo 'Compiling MFIX...'
+    sh $mfix_model_dir/make_mfix -r > compile.log
+    echo 'Compilation finished.'
+    echo 'Running MFIX...'
+    # Change the command in next line accordingly for other mode of execution.
+    ./mfix.exe > run.log
+    echo 'Done.'
+    cd $run_dir
+done
+echo 'All done!'
