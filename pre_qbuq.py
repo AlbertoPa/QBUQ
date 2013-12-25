@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -15,7 +15,7 @@ from qbuq_package.pre_processing.pre_functions import gen_samples, gen_input
 
 print("This script generates samples of the uncertain parameters and MFIX " \
       "input file mfix.dat for each sample.")
-# Generate quadrature nodes and weights for uncertain parameter(s).
+# Generate quadrature nodes and weights for the uncertain parameter(s).
 d = gen_samples()
 # Use generated nodes to generate corresponding MFIX input files.
 gen_input(d)

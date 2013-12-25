@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -10,8 +10,8 @@
 #  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
-#  Yuan, C., Laurent, F., Fox, R.O., 2012. Journal of Aerosol Science    C
-#  51, 1-23.                                                             C
+#  1. Yuan, C., Laurent, F., Fox, R.O., 2012. Journal of Aerosol Science C
+#     51, 1-23.                                                          C
 #                                                                        C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 
@@ -27,7 +27,7 @@ def beta_EQMOM_general(weights, v, a, b, nnodes, rmin, eabs):
     """
     # Check if number of nodes is suitable for beta EQMOM.
     if nnodes > 5:
-        print("Exceed maximum number of nodes for beta EQMOM. Program exits.")
+        print("Maximum number of nodes for beta EQMOM exceeded. Program exits.")
         exit()
     elif nnodes <= 0:
         print("Non-positive number of nodes. Program exits.")
@@ -52,7 +52,7 @@ def beta_EQMOM(mom, nnodes, rmin, eabs):
     """
     # Make sure number of nodes is no larger than 5.
     if nnodes > 5:
-        print("Exceed maximum number of nodes for beta EQMOM. Program exits.")
+        print("Maximum number of nodes for beta EQMOM exceeded. Program exits.")
         exit()
     elif nnodes <= 0:
         print("Non-positive number of nodes. Program exits.")
@@ -75,8 +75,8 @@ def beta_EQMOM(mom, nnodes, rmin, eabs):
     ftol = 1e-14 # tolerance of target function
     stol = 1e-14 # tolerance of sigma
     ztol = 1e-14 # tolerance for function of zbrent method
-    # flag for hankel detminant solution. 
-    #1 means one sig from hankel matrix is computed.
+    # flag for Hankel determinant solution. 
+    #1 means one sig from Hankel matrix is computed.
     detflag = 0 
     flag = 0 # iteration number
     # check if moments are realizable
@@ -85,20 +85,20 @@ def beta_EQMOM(mom, nnodes, rmin, eabs):
         nout = 0
         print("Moments are not realizable, m[0] <= 0.0")
         return w, x, sig, nout, flag
-    # return 0 if the zero-th order moment is too small
+    # return 0 if the zero-order moment is too small
     elif m[0] <= 1e-15:
         sig = 0
         nout = 0
         print("m[0] is too small. Return 0 solutions.")
         return w, x, sig, nout, flag
-    # Find maximum value of sigma (total variance), used as upper bound
+    # Find the maximum value of sigma (total variance), used as upper bound
     sigmax = abs((m[0]*m[2]-m[1]**2)/(m[0]*(m[2]-m[1])))
     sigmaxx = abs(m[2]/(m[2]-m[1]))
     sigmax = max(sigmax, sigmaxx)
     # Initial guess of sigma: sig = 0, used as lower bound
     sold = 0
     sig = sold
-    # Check if sig=0 satisfies Hdet>=0 or else use QMOM.
+    # Check if sig = 0 satisfies Hdet >= 0 or else use QMOM.
     for i in range(n, 0, -1):
         Hdet = beta_targetHdet(m, sig, n)
         if Hdet < 0:
@@ -113,8 +113,8 @@ def beta_EQMOM(mom, nnodes, rmin, eabs):
                 nout = 1
                 return w, x, sig, nout, flag
             break
-    # sigposi is the sig value that makes Hdet>=0, used as lower bound for 
-    # brent method.
+    # sigposi is the sig value that makes Hdet >= 0, used as lower bound for 
+    # Brent method.
     posinum = 0
     sigposi = []
     if Hdet >= -macheps and detflag == 0:
@@ -294,7 +294,7 @@ def beta_EQMOM(mom, nnodes, rmin, eabs):
             dsmax = sigmaxx-sig
             method = 1
         flag = j
-    # Compute results if number of iteration exceed itmax.
+    # Compute results if number of iteration exceeds itmax.
     if detflag == 1:
         sigtemp = sig
         ms = beta_m2ms(m, sigtemp, nmom-1)
@@ -432,7 +432,7 @@ def beta_m2ms(m, sig, nmom):
         -723680*sig**6*ms[4]-1172700*sig**7*ms[3]-1026576*sig**8*ms[2]\
         -362880*sig**9*ms[1]
     if nmom >= 12:
-        print("Too many EQMOM nodes try to be used. Program exits.")
+        print("Trying to use too many EQMOM nodes. Program exits.")
         exit()
     return ms
 

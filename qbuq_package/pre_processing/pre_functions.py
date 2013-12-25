@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -22,14 +22,14 @@ from qbuq_package.pre_processing import pre_algorithms
 #========================================================================#
 
 def gen_samples():
-    """ Return weights and nodes of the uncertain parameters. """
+    """ Returns weights and nodes of the uncertain parameters. """
     d = ask_dimension()
     print("A text file of weights and nodes of samples has been generated "\
           "successfully.")
     return d
 
 def ask_dimension():
-    """ Read the dimension of user's problem."""
+    """ Reads the dimension of user's problem."""
     print("Please select the dimension of your problem or press q to exit.")
     print("1 -- Univariate problem")
     print("2 -- Bivariate problem")
@@ -46,12 +46,12 @@ def ask_dimension():
     else:
         # If none of "1", "2" or "q" is selected, ask users to select again.
         print("The script can now be used only for univariate or bivariate " \
-        "problem. Please select again.")
+        "problems. Please select again.")
         d = ask_dimension()
     return d
 
 def ask_known_1D_distribution():
-    """ Ask if the distribution of the variable is known."""
+    """ Asks if the distribution of the variable is known."""
     print("Is the distribution of the variable known (y/n)?")
     ans = input(">>>")
     if str.lower(ans) == 'y':
@@ -95,7 +95,7 @@ def ask_1D_distribution():
         ask_1D_distribution()
 
 def uniform_sample():
-    """ Return weights and nodes of uniform distribution on interval [a,b]."""
+    """ Returns weights and nodes of uniform distribution on interval [a,b]."""
     N = ask_sample_number()
     # Calculate recurrence coefficients for monic Legendre polynomials.
     ab = pre_algorithms.r_legendre(N)
@@ -113,7 +113,7 @@ def uniform_sample():
     return w, x
 
 def gauss_sample():
-    """ Return weights and nodes of Gaussian distribution with mean mu and
+    """ Returns weights and nodes of Gaussian distribution with mean mu and
     sigma sig.
     """
     N = ask_sample_number()
@@ -137,7 +137,7 @@ def gauss_sample():
     return w, x
 
 def adaptive_Wheeler():
-    """ Return weights and nodes using adaptive Wheeler algorithm with users'
+    """ Returns weights and nodes using adaptive Wheeler algorithm with users'
     input conditions.
     """
     N = ask_sample_number()
@@ -158,7 +158,7 @@ def adaptive_Wheeler():
     return w, x, nout, werror
 
 def CQMOM_2D():
-    """ Return weights and nodes using 2D CQMOM algorithm with users' input
+    """ Returns weights and nodes using 2D CQMOM algorithm with users' input
     conditions.
     """
     print("For uncertain parameter 1")
@@ -193,7 +193,7 @@ def CQMOM_2D():
     return weights, node1, node2
 
 def ask_known_2D_distribution(nodex, nodey):
-    """ Return moments needed in CQMOM for bivariate distribution."""
+    """ Returns moments needed in CQMOM for bivariate distribution."""
     print("Is the bivariate distribution known (y/n)?")
     ans = input(">>>")
     if str.lower(ans) == 'y':
@@ -218,7 +218,7 @@ def ask_known_2D_distribution(nodex, nodey):
     return moments
 
 def ask_sample_number():
-    """ Return number of samples need to generate."""
+    """ Returns number of samples need to generate."""
     print('How many samples do you need to generate? Press q to quit.')
     n = input(">>>")
     if str.lower(n) == 'q':
@@ -234,7 +234,7 @@ def ask_sample_number():
     return num
 
 def ask_moments():
-    """ Return moments read from local text file."""
+    """ Returns moments read from local text file."""
     print("Is the moments text file in the current work directory (y/n)?")
     m = input(">>>")
     if str.lower(m) == 'y':
@@ -265,7 +265,7 @@ def ask_moments():
     return moments
 
 def ask_para_Wheeler(N):
-    """ Return rmin and eabs for adaptive Wheeler algorithm."""
+    """ Returns rmin and eabs for adaptive Wheeler algorithm."""
     print("Please enter "+str(N)+" ratios of minimum weights to maximum "\
       "weights (rmin). See documents for details about these ratios.")
     rmin = zeros(N)
@@ -278,7 +278,7 @@ def ask_para_Wheeler(N):
     return rmin, eabs
 
 def ask_coeff_2D_Gaussian():
-    """ Return the coefficients bivariate Gaussian distribution."""
+    """ Returns the coefficients bivariate Gaussian distribution."""
     print("Please enter the mean value of uncertain parameter 1.")
     mu1 = ask_num()
     print("Please enter the standard deviation of uncertain parameter 1.")
@@ -292,7 +292,7 @@ def ask_coeff_2D_Gaussian():
     return mu1, mu2, sigma1, sigma2, rho
 
 def ask_para_CQMOM_2D(nodex, nodey):
-    """ Return rmin1, rmin2, and eabs for 2D CQMOM."""
+    """ Returns rmin1, rmin2, and eabs for 2D CQMOM."""
     print("Please enter "+str(nodex)+" ratios of minimum weights to "\
               "maximum weights (rmin1) for parameter 1.")
     rmin1 = zeros(nodex)
@@ -310,7 +310,7 @@ def ask_para_CQMOM_2D(nodex, nodey):
     return rmin1, rmin2, eabs
 
 def ask_uniform_interval():
-    """ Return the bounded interval for arbitary uniform distribution."""
+    """ Returns the bounded interval for arbitary uniform distribution."""
     print("Please enter the minimum value of the uncertain parameter.")
     a = ask_num()
     print("Please enter the maximum value of the uncertain paramter.")
@@ -322,7 +322,7 @@ def ask_uniform_interval():
     return a, b
 
 def ask_num():
-    """ Return a number entered by users."""
+    """ Returns a number entered by users."""
     n = input(">>>")
     if str.lower(n) == 'q':
         exit()
@@ -340,7 +340,7 @@ def isnumber(s):
         return True
 
 def ask_int():
-    """ Return an integer entered by users."""
+    """ Returns an integer entered by users."""
     n = input(">>>")
     if str.lower(n) == 'q':
         exit()
@@ -351,7 +351,7 @@ def ask_int():
     return num
 
 def check_file(filename):
-    """ Check if a file exists. Return if true, else program exits."""
+    """ Checks if a file exists. Return if true, else program exits."""
     if isfile(filename) != True:
         print(filename+ " does NOT exist. Program exits.")
         exit()
@@ -363,7 +363,7 @@ def check_file(filename):
 #========================================================================#
 
 def gen_input(d):
-    """ Generate mfix input files for each sample."""
+    """ Generates MFIX input files for each sample."""
     print("Start generating MFIX input files.")
     # Ask for the head of the run name.
     name_head = ask_name_head()
@@ -382,7 +382,7 @@ def gen_input(d):
     print('MFIX input files are generated successfully.')
 
 def ask_name_head():
-    """ Return the head of the run name (case sensitive). This name + the sample 
+    """ Returns the head of the run name (case sensitive). This name + the sample 
     number is the name of the run directory and the real run name for each
     sample.
     """
@@ -391,10 +391,10 @@ def ask_name_head():
     return name_head
     
 def ask_keyword_1D():
-    """ Return a tuple containing keywords using the value of the uncertain
+    """ Returns a tuple containing keywords using the value of the uncertain
     parameter.
     """
-    # Creat a blank list to store the keywords using the value of the parameter.
+    # Create a blank list to store the keywords using the value of the parameter.
     obj = []
     print("How many keywords use the value of the uncertain parameter?")
     n = ask_int()
@@ -411,7 +411,7 @@ def ask_keyword_1D():
     return obj_key
 
 def ask_keyword_2D():
-    """ Return a tuple containing keywords using values of uncertain parameters.
+    """ Returns a tuple containing keywords using values of uncertain parameters.
     """
     # Use lists in a list to store keywords for each parameter.
     obj= [[], []]
@@ -443,7 +443,7 @@ def ask_keyword_2D():
     return obj_key
     
 def gen_mfix(name_head, obj, xw):
-    """ Replace the value of the keywords in the basic mfix.dat file with the
+    """ Replaces the value of the keywords in the basic mfix.dat file with the
     sample values, and stored the new mfix.dat files in separated folders.
     """
     cf = getcwd()

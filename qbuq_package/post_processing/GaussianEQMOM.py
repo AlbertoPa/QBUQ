@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -10,11 +10,11 @@
 #  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
-#  Chalons, C., Fox, R.O., Massot, M., 2010. Center for Turbulence       C
-#  Research, Stanford University. Proceedings of the Summer Program      C 
-#  2010, 347-358.                                                        C
-#  Desjardins, O., Fox, R.O., Villedieu, P., 2008. Journal of            C
-#  Computational Physics 227, 2514-2539.                                 C
+#  1. Chalons, C., Fox, R.O., Massot, M., 2010. Center for Turbulence    C
+#     Research, Stanford University. Proceedings of the Summer Program   C 
+#     2010, 347-358.                                                     C
+#  2. Desjardins, O., Fox, R.O., Villedieu, P., 2008. Journal of         C
+#     Computational Physics 227, 2514-2539.                              C
 #                                                                        C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 
@@ -54,7 +54,7 @@ def GaussianEQMOM2node(weights, v):
     if e <= 0.0:
         sig = 0
         nout = 0
-        print("The system is not well-defined, e <= 0.0")
+        print("The system is not well-defined, e <= 0.")
         return w, x, sig, nout
     elif abs(q) < macheps:
         if eta > 3*e**2:

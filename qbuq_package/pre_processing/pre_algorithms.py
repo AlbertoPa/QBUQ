@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -9,11 +9,11 @@
 #  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
-#  Gautschi, W., 2004. Oxford University Press, New York.                C
-#  Press, W.H., Teukolsky, S.A., Vetterling, W.T., Flannery, B.P., 1992. C
-#  Cambridge University Press, Cambridge.                                C
-#  Yuan, C., Fox, R.O., 2011. Journal of Computational Physics 230,      C
-#  8216-8246.                                                            C
+#  1. Gautschi, W., 2004. Oxford University Press, New York.             C
+#  2. Press, W.H., Teukolsky, S.A., Vetterling, W.T., Flannery, B.P.,    C
+#     1992, Cambridge University Press, Cambridge.                       C
+#  3. Yuan, C., Fox, R.O., 2011. Journal of Computational Physics 230,   C
+#     8216-8246.                                                         C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 
 from scipy import column_stack, diag, dot, insert, newaxis, pi, spacing, sqrt
@@ -31,7 +31,7 @@ from sympy.matrices import Matrix, matrix2numpy, zeros as zeros_sym
 #------------------------------------------------------------------------#
 
 def r_hermite(N):
-    """" Return the first n recurrence coefficients for monic Hermite
+    """" Returns the first n recurrence coefficients for monic Hermite
     polynomials.
     """
     A = zeros(N)
@@ -43,7 +43,7 @@ def r_hermite(N):
     return ab
 
 def r_legendre(N):
-    """" Return the first n recurrence coefficients for monic Legendre
+    """" Returns the first n recurrence coefficients for monic Legendre
     polynomials.
     """
     A = zeros(N)
@@ -55,7 +55,7 @@ def r_legendre(N):
     return ab
 
 def gauss(N, ab):
-    """" Return the gauss quadrature weights and nodes."""
+    """" Returns the gauss quadrature weights and nodes."""
     J = zeros((N, N))
     for i in range(0, N):
         J[i, i] = ab[i, 0]
@@ -75,14 +75,14 @@ def gauss(N, ab):
 #------------------------------------------------------------------------#
 
 def Wheeler_moments_adaptive(mom, n, rmin, eabs):
-    """ Return weights,  nodes, and number of nodes using adaptive Wheeler
+    """ Returns weights,  nodes, and number of nodes using adaptive Wheeler
     algorithm.
     """
     cutoff = 0
     werror = 0 # Return 1 if error occurs.
-    # Check if moments are unrealizable.
+    # Check if moments are not realizable.
     if mom[0] <= 0:
-        print("Moments are NOT realizable, moment[0] <= 0.0. Program exits.")
+        print("Moments are not realizable, moment[0] <= 0.0. Program exits.")
         werror = 1
         exit()
     if n == 1 or mom[0] < rmin[0]:
@@ -175,7 +175,7 @@ def Wheeler_moments_adaptive(mom, n, rmin, eabs):
 #========================================================================#
 
 def gen_CQMOM_2D(mom, rmin1, rmin2, eabs, nodex, nodey):
-    """ Return weights and nodes in each direction using 2D CQMOM.""" 
+    """ Returns weights and nodes in each direction using 2D CQMOM.""" 
     if nodex == 0 or nodey == 0:
         print('Cannot use 0 nodes!')
         exit()
@@ -184,7 +184,7 @@ def gen_CQMOM_2D(mom, rmin1, rmin2, eabs, nodex, nodey):
     u2 = zeros(nodex*nodey)
     small = 10*spacing(1)
     if mom[0, 0] <= 0:
-        print("Moments are not realizable, moment[0] <= 0.0! Program exits.")
+        print("Moments are not realizable, moment[0] <= 0! Program exits.")
         exit()
     elif mom[0, 0] < rmin1[0]:
         n[0] = mom[0, 0]
@@ -294,7 +294,7 @@ def gen_CQMOM_2D(mom, rmin1, rmin2, eabs, nodex, nodey):
 
 # Moment generation function of bivariate Gaussian distribution
 def MGF_2D_Gaussian(N1, N2, mu1, mu2, sigma1, sigma2, rho):
-    """ Return moments of bivariate Gaussian distribution using moment
+    """ Returns moments of bivariate Gaussian distribution using moment
     generation function.
     """
     t1, t2 = symbols('t1, t2', real=True)
@@ -326,7 +326,7 @@ def MGF_2D_Gaussian(N1, N2, mu1, mu2, sigma1, sigma2, rho):
 
 # Vandermonde matrix solver
 def vanderls(x, q, n):
-    """ Return solution of Vandermonde linear system x**(k-1)*w = q."""
+    """ Returns solution of Vandermonde linear system x**(k-1)*w = q."""
     c = zeros(n)
     w = zeros(n)
     if n == 1:

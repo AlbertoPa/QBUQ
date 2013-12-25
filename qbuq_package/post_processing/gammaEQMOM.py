@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -10,8 +10,8 @@
 #  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
-#  Yuan, C., Laurent, F., Fox, R.O., 2012. Journal of Aerosol Science    C
-#  51, 1-23.                                                             C
+#  1. Yuan, C., Laurent, F., Fox, R.O., 2012. Journal of Aerosol Science C
+#     51, 1-23.                                                          C
 #                                                                        C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 
@@ -27,7 +27,7 @@ def gamma_EQMOM_general(weights, v, a, nnodes, rmin, eabs):
     """
     # Check if number of nodes is suitable for gamma EQMOM.
     if nnodes > 5:
-        print("Exceed maximum number of nodes for gamma EQMOM. Program exits.")
+        print("Maximum number of nodes for gamma EQMOM exceeded. Program exits.")
         exit()
     elif nnodes <= 0:
         print("Non-positive number of nodes. Program exits.")
@@ -52,7 +52,7 @@ def gamma_EQMOM(mom, nnodes, rmin, eabs):
     """
     # Make sure number of nodes is no larger than 5.
     if nnodes > 5:
-        print("Exceed maximum number of nodes for gamma EQMOM. Program exits.")
+        print("Maximum number of nodes for gamma EQMOM exceeded. Program exits.")
         exit()
     elif nnodes <= 0:
         print("Non-positive number of nodes. Program exits.")
@@ -84,7 +84,7 @@ def gamma_EQMOM(mom, nnodes, rmin, eabs):
     if m[0] <= 0.0:
         sig = 0
         nout = 0
-        print("Moments are not realizable, m[0] <= 0.0")
+        print("Moments are not realizable, m[0] <= 0.")
         return w, x, sig, nout, flag
     # return 0 if the zero-th order moment is too small
     elif m[0] <= 1e-15:
@@ -102,7 +102,7 @@ def gamma_EQMOM(mom, nnodes, rmin, eabs):
     # Initial guess of sigma: sig = 0, used as lower bound
     sold = 0
     sig = sold
-    # Check if sig=0 satisfies Hdet>=0 or else use QMOM.
+    # Check if sig = 0 satisfies Hdet >= 0 or else use QMOM.
     for i in range(n, 0, -1):
         Hdet = gamma_targetHdet(m, sig, n)
         if Hdet < 0:
@@ -117,8 +117,8 @@ def gamma_EQMOM(mom, nnodes, rmin, eabs):
                 nout = 1
                 return w, x, sig, nout, flag
             break
-    # sigposi is the sig value that makes Hdet>=0, 
-    # used as lower bound for brent method.
+    # sigposi is the sig value that makes Hdet >= 0, 
+    # used as lower bound for Brent method.
     posinum = 0
     sigposi = []
     if Hdet >= -macheps and detflag == 0:
@@ -135,7 +135,7 @@ def gamma_EQMOM(mom, nnodes, rmin, eabs):
     # Compute f(sig) = fold first.
     ms = gamma_m2ms(m, sig, nmom-1)
     fold = gamma_targetfun(m, sig, n, nnodes, rmin, eabs)
-    # Check if sig=0 is the solution.
+    # Check if sig = 0 is the solution.
     if abs(fold) < ftol:
         w, x, nout, _ = Wheeler_moments_adaptive(m[:2*n], n, rmin, eabs)
         print("Sigma = 0 is the solution. QMOM is used.")
@@ -410,7 +410,7 @@ def gamma_m2ms(m, sig, nmom):
         -63273*sig**4*ms[6]-269325*sig**5*ms[5]-723680*sig**6*ms[4]\
         -1172700*sig**7*ms[3]-1026576*sig**8*ms[2]-362880*sig**9*ms[1]
     if nmom >= 12:
-        print("Too many EQMOM nodes try to be used. Program exits")
+        print("Trying to use too many EQMOM nodes. Program exits")
         exit()
     return ms
     
@@ -502,7 +502,7 @@ def gamma_initial_df(ms, n):
     elif n == 5:
         df = -45*ms[9]
     else:
-        print("Too many EQMOM nodes try to be used!")
+        print("Trying to use too many EQMOM nodes!")
     return df
 
 def gamma_zbrent(m, n, x1, x2, tol):

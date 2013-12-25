@@ -1,4 +1,4 @@
-#! /usr/bin python3
+#!/usr/bin python3
 
 #vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvC
 #                                                                        C
@@ -9,8 +9,8 @@
 #  Reviewer: Alberto Passalacqua <albertop@iastate.edu>                  C
 #                                                                        C
 #  Literature/Document Reference:                                        C
-#  Yuan, C., Fox, R.O., 2011. Journal of Computational Physics 230,      C
-#  8216-8246.                                                            C
+#  1. Yuan, C., Fox, R.O., 2011. Journal of Computational Physics 230,   C
+#  	  8216-8246.                                                         C
 #                                                                        C
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^C
 
@@ -25,7 +25,7 @@ def Wheeler_moments_adaptive(mom, n, rmin, eabs):
     werror = 0 # Return 1 if error occurs.
     # Check if moments are unrealizable.
     if mom[0] <= 0:
-        print("Moments are NOT realizable, moment[0] <= 0.0. Program exits.")
+        print("Moments are not realizable, moment[0] <= 0. Program exits.")
         werror = 1
         exit()
     if n == 1 or mom[0] < rmin[0]:
