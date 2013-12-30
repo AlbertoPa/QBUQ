@@ -71,6 +71,8 @@
 \usepackage{parskip}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
+\usepackage{paralist}
+\usepackage{enumitem}
 
 \newcommand{\xbf}{\mathbf{x}}
 \newcommand{\xibf}{\boldsymbol{\xi}}
@@ -83,46 +85,6 @@
 \newcommand{\Mrm}{\textrm{M}}
 \newcommand{\Nrm}{\textrm{N}}
 \newcommand{\Qrm}{\textrm{Q}}
-
-
-
-%\begin{frontmatter}
-
-%% Title, authors and addresses
-%\title{An Example to Run Quadrature-Based Uncertainty Quantification Package for 
-%MFIX}
-
-%\author{X.~Hu, A.~Passalacqua, F.~O.~Fox}
-%\ead{xhu@iastate.edu}
-%\address[Ad1]{Department of Chemical and Biological Engineering, Iowa State
-%University, 2114 Sweeney Hall, Ames, IA 50011-2230, USA}
-%\author{A. Passalacqua}
-%\ead{albertop@iastate.edu}
-%\address[Ad2]{Department of Mechanical  Engineering, Iowa State
-%University, 2074 Black Engineering Building, Ames, IA 50011-2161, USA}
-%\cortext[cor1]{Corresponding author}
-%\author[Ad3]{Prakash Vedula}
-%\address[Ad3]{School of Aerospace and Mechanical Engineering, University of
-%Oklahoma, Norman, OK 73019-0601, USA}
-%\ead{pvedula@ou.edu}
-%\author{R.~O.\ Fox}
-%\ead{rofox@iastate.edu}
-
-%\begin{abstract}
-%% abstract here
-%\end{abstract}
-
-%\begin{keyword}
-%% keywords here, in the form: keyword \sep keyword
-
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
-
-%\end{keyword}
-
-%\end{frontmatter}
-
-% \linenumbers
 
 \begin{document}
 
@@ -192,56 +154,74 @@ The pre-processing module samples the space of uncertain parameters (particle
 diameter here), generates quadrature weights and nodes, and create corresponding
 mfix input files. Python3 file ``pre\_qbuq.py'' is the main script, and 
 corresponding functions are in subpackage ``pre\_processing'' under package 
-``qbuq\_package''. To run the module, first go to your \emph{run directory} in 
-command window, then type: 
+``qbuq\_package''. To use the module, follow the following procedure.
 
-\textbf{python3 pre\_qbuq.py}
-
-The program asks you to choose number of uncertain parameters. Only univariate 
-and bivariate problems are implemented for now. For our case, the only uncertain
-parameter is particle diameter, so type \textbf{1} to select ``1 -- Univariate 
-problem''.
-
-Then the program asks if the distribution of the variable is known. Type 
-\textbf{y} for yes here since the particle diameter in our example is uniformly
-distributed. In the next prompt, type \textbf{1} to choose ``Uniform 
-distribution''.
-
-Next the program asks how many samples you need to generate. Here we use 
-\textbf{10} samples in the example. Then you are asked for the range of your 
-uniformly distributed uncertain parameter. Remember, in the basic MFIX input 
-file mfix.dat, the units system we use is ``\emph{cgs}''. Therefore, our range 
-of particle diameter is $0.03\ \textrm{cm}$ to $0.05\ \textrm{cm}$. Type 
-\textbf{0.03} as the minimum value and \textbf{0.05} as the maximum value.
+\begin{enumerate}[leftmargin=0cm,itemindent=0.5cm]
+ \item Go to your \emph{run directory} in command window, then type the command 
+  below to run the module:
+  
+  \textbf{python3 pre\_qbuq.py}
+  
+ \item Type \textbf{1} to select ``1 -- Univariate problem''.
+ 
+ The program asks you to choose number of uncertain parameters. Only univariate 
+ and bivariate problems are implemented for now. For our case, the only uncertain
+ parameter is particle diameter.
+ 
+ \item Type \textbf{y} for known distribution.
+ 
+ The program asks if the distribution of the variable is known. Since the 
+ particle diameter in our example is uniformly distributed, we choose ``yes''.
+ 
+ \item Type \textbf{1} to choose ``Uniform distribution''.
+ 
+ \item Type \textbf{10} to generate ten samples in the example.
+ 
+ \item Enter \textbf{0.03} as the minimum value and \textbf{0.05} as the maximum
+ value.
+ 
+ This is the range of your uniformly distributed uncertain parameter. Remember, 
+ in the basic MFIX input file mfix.dat, the units system we use is 
+ ``\emph{cgs}''. Therefore, our range of particle diameter is 
+ $0.03\ \textrm{cm}$ to $0.05\ \textrm{cm}$.
+\end{enumerate}
 
 So far the first step, sample the space of uncertain parameter is finished. The
 program says a text file containing quadrature weights and nodes are generated 
 successfully. The name of this file is ``quadrature\_weights\_nodes.txt'', in 
 which the first row shows quadrature weights, and the second row shows 
-quadrature nodes.
+quadrature nodes. Then the program starts to generate MFIX input files for each 
+sample.
 
-Then the program starts to generate MFIX input files for each sample. First a 
-case sensitive head of the run\_name is asked. Then the run\_name for each 
-mfix.dat file will be this head followed by a number. In our case, type 
-\textbf{Test}, and with increasing particle size, the run\_name will be Test0 to 
-Test9.
-
-Next the program asks how many keywords in mfix.dat file use the value of the 
-uncertain parameter. Please count carefully to include all keywords related to
-the uncertain parameter. In our case, only one keyword ``\emph{D\_p0}'' is 
-related to particle diameter. Type \textbf{1} here, and type \textbf{D\_p0} for 
-the next prompt. \emph{\underline{Note:}} The keywords typed here should be 
-exactly the same with those in the basic mfix.dat file because these keywords 
-will be searched and their values will be replaced by the quadrature nodes. If 
-the keywords cannot match, the values may not be replaced.
-
+\begin{enumerate}[resume,leftmargin=0cm,itemindent=0.5cm]
+ \item Type \textbf{Test} as the head of the run\_name.
+ 
+ The head of the run\_name is case sensitive. The run\_name for each mfix.dat 
+ file will be this head followed by a number. In our case, with increasing 
+ particle size, the run\_name will be Test0 to Test9.
+ 
+ \item Enter \textbf{1} as the number of keywords in mfix.dat file use the value
+ of the uncertain parameter.
+ 
+ Please count carefully to include all keywords related to the uncertain 
+ parameter. In our case, only one keyword ``\emph{D\_p0}'' is related to 
+ particle diameter.
+ 
+ \item Type \textbf{D\_p0} as the name of the keyword.
+ 
+ \emph{\underline{Note:}} The keywords typed here should be exactly the same 
+ with those in the basic mfix.dat file because these keywords will be searched 
+ and their values will be replaced by the quadrature nodes. If the keywords 
+ cannot match, the values may not be replaced.
+ 
 Then the program searches keywords ``\emph{run\_name}'' and  ``\emph{D\_p0}'' in 
 the basic mfix.dat file and replaces their values with the new run\_name and 
 quadrature node value, respectively. The MFIX input file mfix.dat generated for 
 each sample is stored in separated directories named by their run\_name. A text
 file named ``\emph{list\_of\_cases.txt}'' is also generated, which contains 
 run\_name of each sample in the order of increasing quadrature nodes so that in
-post-processing part quadrature weights and nodes are corresponded. 
+post-processing part quadrature weights and nodes are corresponded.
+\end{enumerate}
 
 Now the pre-processing part of QBUQ procedure is finished. Program says MFIX 
 input files are generated successfully. In the run directory, you now have 2 
@@ -273,8 +253,9 @@ in~\ref{sec:Pre-processing}. The options used in this example are following:
 \begin{itemize}
  \item Mode of execution: [1] Serial
  \item Level of optimization: [3] Level 3 (most aggressive)
- \item Option to re-compile source files in run directory: [1] Do not force 
- re-compilation
+ \item Option to re-compile source files in run directory: 
+ 
+ [1] Do not force re-compilation
  \item Compiler selection: [1] GNU (gfortran) version 4.3 and above
 \end{itemize}
 
@@ -290,7 +271,7 @@ quantities can be extracted, and the post-processing module of QBUQ can be used.
 
 The post-processing module first extracts time-averaged quantities with a bash
 shell script ``extract\_data'' by calling MFIX post-processing program 
-``post\_mfix''. Then time-averaged results can be used for QBUQ post-processing 
+``post\_mfix''. Then time-averaged results can be used for QBUQ post-\\processing 
 module ``post\_qbuq.py''. The module can perform 2 tasks:\ estimate moments and 
 low order statistics (mean, variance, skewness, and kurtosis), and reconstruct 
 the PDF of system response. Functions used in this module are in subpackage 
@@ -306,9 +287,9 @@ run\_name automatically and extract the data for each simulation. In this
 example, 2 basic text files are provided in the run directory:\ 
 ``post\_all.txt'' extracts time-averaged quantities on the whole computational
 domain which will be used for estimation of moments and low order statistics, 
-and ``post\_point.txt'' extracts data at one specific location which will be 
+and \\``post\_point.txt'' extracts data at one specific location which will be 
 used for reconstruction of the PDF. The following parts show what conditions are 
-used in these two post\_mfix input files for MFIX post-processing program . 
+used in these two post\_mfix input files for MFIX post-processing program. 
 \emph{\underline{Note:}} When name the file stored the extracted data, a .txt 
 file extension must be added. Only .txt files can be read by the post\_qbuq 
 module.
@@ -381,7 +362,7 @@ all simulations, in the run directory, type:
 
 Here the ``post\_file'' is the file used as the input for MFIX post-processing
 program ``post\_mfix''. In this example, it can be either ``post\_all.txt'' or
-``post\_point.txt''. The ``post\_mfix\_directory'' is the path of your MFIX
+``post\_point.txt''. The ``post\_mfix\_directory'' is the path of your MFIX\\
 post\_mfix directory, such as ``/home/mfix/post\_mfix''. We run the script
 twice using both ``post\_all.txt'' and ``post\_point.txt'' to extract gas 
 volume fraction ``\emph{EP\_g}'' on the whole computational domain, and gas
@@ -395,21 +376,26 @@ Once the process is completed, these data can be used for post\_qbuq module.
 Two tasks can be performed by the QBUQ post-processing module, estimation of 
 moments and low order statistics, and reconstruction of the PDF of system
 response. Here first shows estimation of moments and low order statistics. 
-To run the module, in the run directory, type:
 
-\textbf{python3 post\_qbuq.py}
-
-The program asks you to select your job first. Type \textbf{1} to to choose
-``1 -- Calculate low order statistics''.
-
-Then the program asks for the file name of the quantity of interest. In this 
-example, it is the file name used in file ``post\_all.txt'', ``EP\_g\_all.txt''.
-So type \textbf{EP\_g\_all.txt} to continue. Next the program asks how many 
-samples we have. Type \textbf{10} for 10 samples in this example.
-
-Then we are asked for the highest order of moments. In order to estimate low
-order statistics including mean, variance, skewness, and kurtosis, at least 
-fourth order moment is needed. So type \textbf{4} here to continue.
+\begin{enumerate}[leftmargin=0cm,itemindent=0.5cm]
+ \item In the run directory, type the following command to run the module:
+ 
+  \textbf{python3 post\_qbuq.py}
+  
+ \item Type \textbf{1} to choose ``1 -- Calculate low order statistics''.
+ 
+ \item Type \textbf{EP\_g\_all.txt} to continue.
+ 
+ Here the program asks for the file name of the quantity of interest. In this 
+ example, it is the file name used in file ``post\_all.txt'', ``EP\_g\_all.txt''.
+ 
+ \item Type \textbf{10} for 10 samples in this example.
+ 
+ \item Type \textbf{4} as the highest order of moments.
+ 
+ In order to estimate low order statistics including mean, variance, skewness, 
+ and kurtosis, at least fourth order moment is needed.
+\end{enumerate}
 
 Next the program uses the time-averaged data of each simulation extracted 
 in~\ref{sec:ExtractData} as quadrature abscissas and the quadrature weights 
@@ -421,12 +407,11 @@ deviation as the denominator may become 0 at those locations, which results in
 ``NaN'' or ``Inf'' for skewness and kurtosis. These warning do not effect the 
 results at other locations. 
 
-Once the program is completed, 5 more text files are
-generated in the run directory:\ ``moments.txt'', ``mean.txt'', 
-``variance.txt'', ``skewness.txt'', and ``kurtosis.txt''. Make sure these files 
-are stored and renamed correctly before using the post\_qbuq module again. 
-These files will be rewritten when the module is used for other quantities of 
-interest.
+Once the program is completed, 5 more text files are generated in the run 
+directory:\ ``moments.txt'', ``mean.txt'', ``variance.txt'', ``skewness.txt'', 
+and ``kurtosis.txt''. \emph{\underline{Note:}} Make sure these files are stored 
+and renamed correctly before using the post\_qbuq module again. These files will 
+be rewritten when the module is used for other quantities of interest.
 
 \subsubsection{Reconstruction of the PDF}
 \label{sec:Reconstruction}
@@ -443,31 +428,45 @@ quantities one by one.
 \paragraph{Gas volume fraction ``\emph{EP\_g}''}\mbox{}\\
 \label{sec:ReconEPg}
 
-Type the following command to run the QBUQ post-processing module.
+\begin{enumerate}[leftmargin=0cm,itemindent=0.5cm]
+ \item Type the following command in the run directory to run the QBUQ 
+ post-processing module:
+ 
+ \textbf{python3 post\_qbuq.py}
+ 
+ \item Type \textbf{2} to select ``2 -- Reconstruction the probability 
+ distribution function''.
+ 
+ \item Enter \textbf{1} to choose $\beta$-EQMOM for \emph{EP\_g}.
+ 
+ \item Type \textbf{4} as number of nodes.
+ 
+ Maximum 5 nodes can be used in $\beta$-EQMOM and $\gamma$-EQMOM.
+ 
+ \item Type \textbf{0}, $\mathbf{1e-12}$, $\mathbf{1e-8}$, and $\mathbf{1e-4}$
+ as $rmin(0)$, $rmin(1)$, $rmin(2)$, and $rmin(3)$, respectively.
+ 
+ These are the 4 ratios of minimum weights to maximum weights (rmin), which are 
+ parameters used in adaptive Wheeler algorithm\cite{YuanFox2011}.
+ 
+ \item Enter $\mathbf{1e-10}$ as eabs.
+ 
+ This is the minimum distance between distinct nodes, which is also a parameter 
+ used in adaptive Wheeler algorithm\cite{YuanFox2011}.
+ 
+ \item Type \textbf{10} for in total 10 simulations in this example.
+ 
+ \item Type \textbf{EP\_g.txt} as the file name of quantity of interest.
+ 
+ \item Enter \textbf{1} to use minimum to maximum value of the data as the 
+ interval.
+ 
+ In $\beta$-EQMOM, a bounded interval is needed. In the post\_qbuq module, the 
+ bounded interval can either use the minimum to maximum value of the data or be
+ set up manually.
+\end{enumerate}
 
-\textbf{python3 post\_qbuq.py}
-
-Type \textbf{2} to select ``2 -- Reconstruction the probability distribution
-function''. Then enter \textbf{1} to choose $\beta$-EQMOM for \emph{EP\_g}.
-
-Then the program asks for the number of nodes to use. Maximum 5 nodes can be 
-used. Type \textbf{4} for our example. Next the program asks for 4 ratios of 
-minimum weights to maximum weights (rmin), which are parameters used in adaptive
-Wheeler algorithm\cite{YuanFox2011}. For $rmin(0)$, type \textbf{0}; type 
-$\mathbf{1e-12}$ for $rmin(1)$; for $rmin(2)$, enter $\mathbf{1e-8}$; enter 
-$\mathbf{1e-4}$ for $rmin(3)$. In the next prompt, the program asks to enter the
-minimum distance between distinct nodes (eabs), which is also a parameter used 
-in adaptive Wheeler algorithm\cite{YuanFox2011}. Enter $\mathbf{1e-10}$ here.
-
-Next type \textbf{10} for we have in total 10 simulations in this example. Then
-for the file name of quantity of interest, type \textbf{EP\_g.txt}.
-
-In $\beta$-EQMOM, a bounded interval is needed. In the post\_qbuq module, the 
-bounded interval can either use the minimum to maximum value of the data or be
-set up manually. In this example, type \textbf{1} to use minimum to maximum
-value of the data as the interval.
-
-Then the program uses $\beta$-EQMOM to reconstruct the PDF of gas volume 
+The program then uses $\beta$-EQMOM to reconstruct the PDF of gas volume 
 fraction. Once it is completed, information of $\sigma$, weights, nodes on 
 $[0,1]$, and nodes on bounded interval is shown on screen. Three more text files
 are generated in the run directory. File ``betaEQMOM\_sigma.txt'' keeps the 
@@ -560,8 +559,8 @@ Gaussian EQMOM is used\cite{Chalons2010}. The procedure is as follows.
 \end{itemize}
 
 Three more files are generated in the run directory once the reconstruction is
-completed:\ ``GaussianEQMOM\_sigma.txt'', ``GaussianEQMOM\_weights\_nodes.txt'', 
-and ``data\_set\_for\_GaussianEQMOM.txt''. Table~\ref{tab:ReconVs} gives results 
+completed:\ ``GaussianEQMOM\_sigma.txt'', \\``GaussianEQMOM\_weights\_nodes.txt'', 
+and \\``data\_set\_for\_GaussianEQMOM.txt''. Table~\ref{tab:ReconVs} gives results 
 on author's screen for your reference.
 
 \begin{table}[htp]
